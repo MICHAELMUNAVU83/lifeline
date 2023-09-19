@@ -18,7 +18,7 @@ defmodule LifelineWeb.Router do
   end
 
   scope "/", LifelineWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_user]
 
     live "/", PageLive.Index, :index
     live "/addnextofkin", PageLive.Index, :addnextofkin

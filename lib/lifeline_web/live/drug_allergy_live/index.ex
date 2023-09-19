@@ -3,10 +3,17 @@ defmodule LifelineWeb.DrugAllergyLive.Index do
 
   alias Lifeline.DrugAllergies
   alias Lifeline.DrugAllergies.DrugAllergy
+  alias Lifeline.Users
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :drug_allergies, list_drug_allergies())}
+  def mount(_params, session, socket) do
+    user = Users.get_user_by_session_token(session["user_token"])
+    
+
+    {:ok,
+     socket
+     |> assign(:drug_allergies, list_drug_allergies())
+     |> assign(:current_user, user)}
   end
 
   @impl true

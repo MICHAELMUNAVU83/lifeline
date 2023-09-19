@@ -1,6 +1,12 @@
 defmodule Lifeline.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Lifeline.NextOfKins
+  alias Lifeline.NextOfKins.NextofKin
+  alias Lifeline.FoodAllergies
+  alias Lifeline.FoodAllergies.FoodAllergy
+  alias Lifeline.DrugAllergies
+  alias Lifeline.DrugAllergies.DrugAllergy
 
   schema "users" do
     field :email, :string
@@ -10,6 +16,9 @@ defmodule Lifeline.Users.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    has_many :nextofkins, NextofKin
+    has_many :foodallergies, FoodAllergy
+    has_many :drugallergies, DrugAllergy
 
     timestamps()
   end

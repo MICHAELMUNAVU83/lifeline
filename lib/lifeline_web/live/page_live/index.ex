@@ -6,9 +6,15 @@ defmodule LifelineWeb.PageLive.Index do
   alias Lifeline.FoodAllergies.FoodAllergy
   alias Lifeline.DrugAllergies
   alias Lifeline.DrugAllergies.DrugAllergy
+  alias Lifeline.Users
 
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+
+
+  def mount(_params, session, socket) do
+    user = Users.get_user_by_session_token(session["user_token"])
+
+    {:ok, socket
+  |>assign(:current_user, user)}
   end
 
   def handle_params(params, _url, socket) do

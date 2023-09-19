@@ -51,6 +51,8 @@
       title={@page_title}
       action={@live_action}
       nextof_kin={@nextof_kin}
+                  current_user = {@current_user}
+
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>
@@ -65,6 +67,8 @@
       title={@page_title}
       action={@live_action}
       food_allergy={@food_allergy}
+            current_user = {@current_user}
+
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>
@@ -80,6 +84,7 @@
       title={@page_title}
       action={@live_action}
       drug_allergy={@drug_allergy}
+      current_user = {@current_user}
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>

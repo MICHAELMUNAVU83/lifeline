@@ -17,7 +17,9 @@ config :lifeline, LifelineWeb.Endpoint,
   pubsub_server: Lifeline.PubSub,
   live_view: [signing_salt: "z6q2FoFI"]
 
-  config :tailwind, version: "3.3.3", default: [
+config :tailwind,
+  version: "3.3.3",
+  default: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

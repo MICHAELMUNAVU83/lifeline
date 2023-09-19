@@ -41,7 +41,11 @@ defmodule LifelineWeb.DrugAllergyLive.FormComponent do
   end
 
   defp save_drug_allergy(socket, :adddrugallergy, drug_allergy_params) do
-    case DrugAllergies.create_drug_allergy(drug_allergy_params) do
+    new_drug_allergy_params =
+      drug_allergy_params
+      |> Map.put("user_id", socket.assigns.current_user.id)
+
+    case DrugAllergies.create_drug_allergy(new_drug_allergy_params) do
       {:ok, _drug_allergy} ->
         {:noreply,
          socket
