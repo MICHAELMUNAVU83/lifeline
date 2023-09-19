@@ -27,7 +27,7 @@ defmodule LifelineWeb.DrugAllergyLive.FormComponent do
     save_drug_allergy(socket, socket.assigns.action, drug_allergy_params)
   end
 
-  defp save_drug_allergy(socket, :edit, drug_allergy_params) do
+  defp save_drug_allergy(socket, :edit_drug, drug_allergy_params) do
     case DrugAllergies.update_drug_allergy(socket.assigns.drug_allergy, drug_allergy_params) do
       {:ok, _drug_allergy} ->
         {:noreply,

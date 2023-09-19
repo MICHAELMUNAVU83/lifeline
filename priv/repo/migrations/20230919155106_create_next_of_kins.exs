@@ -10,7 +10,7 @@ defmodule Lifeline.Repo.Migrations.CreateNextOfKins do
 
       timestamps()
     end
-    create index(:next_of_kins, [:user_id])
 
+    create index(:next_of_kins, [:user_id])
   end
 end

@@ -8,13 +8,18 @@ defmodule LifelineWeb.PageLive.Index do
   alias Lifeline.DrugAllergies.DrugAllergy
   alias Lifeline.Users
 
-
-
   def mount(_params, session, socket) do
     user = Users.get_user_by_session_token(session["user_token"])
+    drug_allergies = DrugAllergies.list_user_drug_allergies(user.id)
+    food_allergies = FoodAllergies.list_user_food_allergies(user.id)
+    next_of_kin = NextOfKins.list_user_nextofkin(user.id)
 
-    {:ok, socket
-  |>assign(:current_user, user)}
+    {:ok,
+     socket
+     |> assign(:current_user, user)
+     |> assign(:drug_allergies, drug_allergies)
+     |> assign(:food_allergies, food_allergies)
+     |> assign(:nextofkins, next_of_kin)}
   end
 
   def handle_params(params, _url, socket) do
@@ -37,6 +42,32 @@ defmodule LifelineWeb.PageLive.Index do
     socket
     |> assign(:page_title, "New Drug allergy")
     |> assign(:drug_allergy, %DrugAllergy{})
+  end
+
+  defp apply_action(socket, :edit_kin, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Edit Nextof kin")
+    |> assign(:nextof_kin, NextOfKins.get_nextof_kin!(id))
+  end
+
+  defp apply_action(socket, :edit_drug, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Edit Drug allergy")
+    |> assign(:drug_allergy, DrugAllergies.get_drug_allergy!(id))
+  end
+
+  def handle_event("deletekin", %{"id" => id}, socket) do
+    nextof_kin = NextOfKins.get_nextof_kin!(id)
+    {:ok, _} = NextOfKins.delete_nextof_kin(nextof_kin)
+
+    {:noreply, assign(socket, :next_of_kins, NextOfKins.list_next_of_kins())}
+  end
+
+  def handle_event("delete_drug", %{"id" => id}, socket) do
+    drug_allergy = DrugAllergies.get_drug_allergy!(id)
+    {:ok, _} = DrugAllergies.delete_drug_allergy(drug_allergy)
+
+    {:noreply, assign(socket, :drug_allergies, DrugAllergies.list_drug_allergies())}
   end
 
   defp apply_action(socket, :index, _params) do

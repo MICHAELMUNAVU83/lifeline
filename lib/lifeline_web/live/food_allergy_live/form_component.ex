@@ -42,8 +42,8 @@ defmodule LifelineWeb.FoodAllergyLive.FormComponent do
 
   defp save_food_allergy(socket, :addfoodallergy, food_allergy_params) do
     new_food_allergy_params =
-    food_allergy_params
-    |> Map.put("user_id", socket.assigns.current_user.id)
+      food_allergy_params
+      |> Map.put("user_id", socket.assigns.current_user.id)
 
     case FoodAllergies.create_food_allergy(new_food_allergy_params) do
       {:ok, _food_allergy} ->

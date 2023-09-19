@@ -27,7 +27,7 @@ defmodule LifelineWeb.NextofKinLive.FormComponent do
     save_nextof_kin(socket, socket.assigns.action, nextof_kin_params)
   end
 
-  defp save_nextof_kin(socket, :edit, nextof_kin_params) do
+  defp save_nextof_kin(socket, :edit_kin, nextof_kin_params) do
     case NextOfKins.update_nextof_kin(socket.assigns.nextof_kin, nextof_kin_params) do
       {:ok, _nextof_kin} ->
         {:noreply,
@@ -42,8 +42,8 @@ defmodule LifelineWeb.NextofKinLive.FormComponent do
 
   defp save_nextof_kin(socket, :addnextofkin, nextof_kin_params) do
     new_kin_params =
-    nextof_kin_params
-    |> Map.put("user_id", socket.assigns.current_user.id)
+      nextof_kin_params
+      |> Map.put("user_id", socket.assigns.current_user.id)
 
     case NextOfKins.create_nextof_kin(new_kin_params) do
       {:ok, _nextof_kin} ->

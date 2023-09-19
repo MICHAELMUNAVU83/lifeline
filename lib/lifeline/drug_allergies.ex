@@ -21,6 +21,10 @@ defmodule Lifeline.DrugAllergies do
     Repo.all(DrugAllergy)
   end
 
+  def list_user_drug_allergies(id) do
+    Repo.all(from d in DrugAllergy, where: d.user_id == ^id)
+  end
+
   @doc """
   Gets a single drug_allergy.
 

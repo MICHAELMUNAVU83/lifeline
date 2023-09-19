@@ -21,6 +21,10 @@ defmodule Lifeline.NextOfKins do
     Repo.all(NextofKin)
   end
 
+  def list_user_nextofkin(id) do
+    Repo.all(from n in NextofKin, where: n.user_id == ^id)
+  end
+
   @doc """
   Gets a single nextof_kin.
 

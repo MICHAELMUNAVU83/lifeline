@@ -6,10 +6,9 @@ defmodule Lifeline.Repo.Migrations.CreateFoodAllergies do
       add :name, :string
       add :user_id, :integer
 
-
       timestamps()
     end
-    create index(:food_allergies, [:user_id])
 
+    create index(:food_allergies, [:user_id])
   end
 end

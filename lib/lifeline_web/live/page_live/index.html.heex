@@ -4,46 +4,86 @@
     alt="doctor"
     class="w-[180px]  m-4 object-cover"
   />
-
 </div>
-
-
 
 <div class="ml-[250px] p-4 grid grid-cols-2 gap-12">
+  <div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+    <span class="text-lg ml-2 poppins-bold uppercase">
+      Next of kin
+    </span>
+    <%= for kin <- @nextofkins do %>
+      <div class="border-l-4 border-[#BF3442] flex flex-col p-2 rounded-lg  w-[full] bg-[#E9E8F8] h-[20%] m-2">
+        <span><%= kin.name %></span><span><%= kin.phone_number %></span><span><%= kin.relation %></span>
+      </div>
+      <%= live_patch("Edit", to: Routes.page_index_path(@socket, :edit_kin, kin)) %>
+      <span>
+        <%= link("Delete",
+          to: "#",
+          phx_click: "deletekin",
+          phx_value_id: kin.id,
+          data: [confirm: "Are you sure?"]
+        ) %>
+      </span>
+    <% end %>
+    <div class="w-[full]   m-4 bg-[#158BCE] h-[10%] rounded-lg py-2 pl-[25%] ">
+      <span class="mx-[20px] ">
+        <%= live_patch("Add Next of Kin", to: Routes.page_index_path(@socket, :addnextofkin)) %>
+      </span>
+    </div>
+  </div>
 
-<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
-<span><%= live_patch "New Nextof kin", to: Routes.page_index_path(@socket, :addnextofkin) %></span>
-<span class = "text-red-500">tyuyu</span>
+  <div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+    <span></span>
+    <span class="text-lg ml-2 poppins-bold uppercase">
+      Food Allergies
+    </span>
+    <div class="flex gap-2 flex-wrap p-2">
+      <%= for foodallergy <- @food_allergies do %>
+        <div class="border-l-4 border-[#53794B] flex flex-col p-2 rounded-lg  bg-[#E9E8F8] h-[10%] m-2">
+          <span><%= foodallergy.name %></span>
+        </div>
+      <% end %>
+    </div>
 
+    <div class="w-[full]   m-4 bg-[#158BCE] h-[10%] rounded-lg py-2 pl-[25%] ">
+      <span class="mx-[20px] ">
+        <%= live_patch("Add a food", to: Routes.page_index_path(@socket, :addfoodallergy)) %>
+      </span>
+    </div>
+  </div>
 
+  <div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+    <span class="text-lg ml-2 poppins-bold uppercase">
+      Drug allergies
+    </span>
+    <%= for allergy <- @drug_allergies do %>
+      <div class="border-l-4 border-[#53794B] flex flex-col p-2 rounded-lg  w-[full] bg-[#E9E8F8] h-[20%] m-2">
+        <span><%= allergy.name %></span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet sapien et ex
+        </p>
+      </div>
+      <%= live_patch("Edit", to: Routes.page_index_path(@socket, :edit_drug, allergy)) %>
+      <span>
+        <%= link("Delete",
+          to: "#",
+          phx_click: "delete_drug",
+          phx_value_id: allergy.id,
+          data: [confirm: "Are you sure?"]
+        ) %>
+      </span>
+    <% end %>
+    <div class="w-[full]   m-4 bg-[#158BCE] h-[10%] rounded-lg py-2 pl-[25%] ">
+      <span class="mx-[20px] ">
+        <%= live_patch("Add a drug", to: Routes.page_index_path(@socket, :adddrugallergy)) %>
+      </span>
+    </div>
+  </div>
+
+  <div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll"></div>
 </div>
 
-<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
-<span><%= live_patch "New Food allergy", to: Routes.page_index_path(@socket, :addfoodallergy) %></span>
-
-
-
-</div>
-
-<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
-
-
-<span><%= live_patch "New Drug allergy", to: Routes.page_index_path(@socket, :adddrugallergy) %></span>
-</div>
-
-<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-<%= if @live_action in [:addnextofkin] do %>
+<%= if @live_action in [:addnextofkin,:edit_kin] do %>
   <.modal return_to={Routes.page_index_path(@socket, :index)}>
     <.live_component
       module={LifelineWeb.NextofKinLive.FormComponent}
@@ -51,13 +91,11 @@
       title={@page_title}
       action={@live_action}
       nextof_kin={@nextof_kin}
-                  current_user = {@current_user}
-
+      current_user={@current_user}
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
-
 
 <%= if @live_action in [:addfoodallergy] do %>
   <.modal return_to={Routes.page_index_path(@socket, :index)}>
@@ -67,16 +105,13 @@
       title={@page_title}
       action={@live_action}
       food_allergy={@food_allergy}
-            current_user = {@current_user}
-
+      current_user={@current_user}
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
 
-
-
-<%= if @live_action in [:adddrugallergy] do %>
+<%= if @live_action in [:adddrugallergy,:edit_drug] do %>
   <.modal return_to={Routes.page_index_path(@socket, :index)}>
     <.live_component
       module={LifelineWeb.DrugAllergyLive.FormComponent}
@@ -84,7 +119,7 @@
       title={@page_title}
       action={@live_action}
       drug_allergy={@drug_allergy}
-      current_user = {@current_user}
+      current_user={@current_user}
       return_to={Routes.page_index_path(@socket, :index)}
     />
   </.modal>

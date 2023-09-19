@@ -9,7 +9,6 @@ defmodule Lifeline.NextOfKins.NextofKin do
     field :phone_number, :integer
     belongs_to :user, User, foreign_key: :user_id
 
-
     timestamps()
   end
 

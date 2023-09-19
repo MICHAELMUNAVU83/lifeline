@@ -14,13 +14,17 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @food_allergy.name %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.food_allergy_show_path(@socket, :edit, @food_allergy), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.food_allergy_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.food_allergy_show_path(@socket, :edit, @food_allergy),
+    class: "button"
+  ) %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.food_allergy_index_path(@socket, :index)) %></span>

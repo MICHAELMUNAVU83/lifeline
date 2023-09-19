@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @nextof_kin.name %>
@@ -29,8 +28,13 @@
     <strong>Relation:</strong>
     <%= @nextof_kin.relation %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.nextof_kin_show_path(@socket, :edit, @nextof_kin), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.nextof_kin_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.nextof_kin_show_path(@socket, :edit, @nextof_kin),
+    class: "button"
+  ) %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.nextof_kin_index_path(@socket, :index)) %></span>

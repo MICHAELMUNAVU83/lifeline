@@ -24,6 +24,8 @@ defmodule LifelineWeb.Router do
     live "/addnextofkin", PageLive.Index, :addnextofkin
     live "/addfoodallergy", PageLive.Index, :addfoodallergy
     live "/adddrugallergy", PageLive.Index, :adddrugallergy
+    live "/kin/:id/edit", PageLive.Index, :edit_kin
+    live "/drug/:id/edit", PageLive.Index, :edit_drug
   end
 
   # Other scopes may use custom stacks.

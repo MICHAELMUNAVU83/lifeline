@@ -3,11 +3,9 @@ defmodule Lifeline.FoodAllergies.FoodAllergy do
   import Ecto.Changeset
   alias Lifeline.Users.User
 
-
   schema "food_allergies" do
     field :name, :string
     belongs_to :user, User, foreign_key: :user_id
-
 
     timestamps()
   end

@@ -27,13 +27,30 @@
         <td><%= food_allergy.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.food_allergy_show_path(@socket, :show, food_allergy) %></span>
-          <span><%= live_patch "Edit", to: Routes.food_allergy_index_path(@socket, :edit, food_allergy) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: food_allergy.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show",
+              to: Routes.food_allergy_show_path(@socket, :show, food_allergy)
+            ) %>
+          </span>
+          <span>
+            <%= live_patch("Edit",
+              to: Routes.food_allergy_index_path(@socket, :edit, food_allergy)
+            ) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: food_allergy.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Food allergy", to: Routes.food_allergy_index_path(@socket, :new) %></span>
+<span>
+  <%= live_patch("New Food allergy", to: Routes.food_allergy_index_path(@socket, :new)) %>
+</span>

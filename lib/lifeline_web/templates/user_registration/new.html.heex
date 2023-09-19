@@ -76,22 +76,16 @@
 
           <%= error_tag(f, :phone_number) %>
         </div>
-
-       
-
-    
-
-     
       </div>
-          <div class="flex flex-col w-[100%] gap-1">
-          <%= label(f, :password) %>
-          <%= password_input(f, :password,
-            required: true,
-            class:
-              "h-[50px] p-2  my-2 border-transparent focus:border-transparent focus:ring-0 bg-[#F2F2F2] shadow-xl shadow-[#E1DFDF]  "
-          ) %>
-          <%= error_tag(f, :password) %>
-        </div>
+      <div class="flex flex-col w-[100%] gap-1">
+        <%= label(f, :password) %>
+        <%= password_input(f, :password,
+          required: true,
+          class:
+            "h-[50px] p-2  my-2 border-transparent focus:border-transparent focus:ring-0 bg-[#F2F2F2] shadow-xl shadow-[#E1DFDF]  "
+        ) %>
+        <%= error_tag(f, :password) %>
+      </div>
 
       <div class="flex flex-col mt-12 items-center justify-center ">
         <%= submit("Sign Up",
