@@ -1,0 +1,39 @@
+<h1>Listing Food allergies</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.food_allergy_index_path(@socket, :index)}>
+    <.live_component
+      module={LifelineWeb.FoodAllergyLive.FormComponent}
+      id={@food_allergy.id || :new}
+      title={@page_title}
+      action={@live_action}
+      food_allergy={@food_allergy}
+      return_to={Routes.food_allergy_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="food_allergies">
+    <%= for food_allergy <- @food_allergies do %>
+      <tr id={"food_allergy-#{food_allergy.id}"}>
+        <td><%= food_allergy.name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.food_allergy_show_path(@socket, :show, food_allergy) %></span>
+          <span><%= live_patch "Edit", to: Routes.food_allergy_index_path(@socket, :edit, food_allergy) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: food_allergy.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Food allergy", to: Routes.food_allergy_index_path(@socket, :new) %></span>

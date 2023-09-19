@@ -1,0 +1,23 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="drug_allergy-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+
+    <div class="flex flex-col w-[100%]">
+  
+    <%= label f, :name %>
+    <%= text_input f, :name ,class: "w-[100%] bg-gray-50 rounded-md" %>
+    <%= error_tag f, :name %>
+  
+    <div class="bg-blue-400 flex flex-col justify-center items-center p-2 w-[90%] mx-auto cursor-pointer text-white mt-4  hover:scale-105 transition-all ease-in-out duration-500">
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+    </div>
+  </.form>
+</div>

@@ -1,0 +1,26 @@
+<h1>Show Drug allergy</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.drug_allergy_show_path(@socket, :show, @drug_allergy)}>
+    <.live_component
+      module={LifelineWeb.DrugAllergyLive.FormComponent}
+      id={@drug_allergy.id}
+      title={@page_title}
+      action={@live_action}
+      drug_allergy={@drug_allergy}
+      return_to={Routes.drug_allergy_show_path(@socket, :show, @drug_allergy)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @drug_allergy.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.drug_allergy_show_path(@socket, :edit, @drug_allergy), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.drug_allergy_index_path(@socket, :index) %></span>

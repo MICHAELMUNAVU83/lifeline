@@ -1,0 +1,43 @@
+<h1>Listing Next of kins</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.page_index_path(@socket, :index)}>
+    <.live_component
+      module={LifelineWeb.NextofKinLive.FormComponent}
+      id={@nextof_kin.id || :new}
+      title={@page_title}
+      action={@live_action}
+      nextof_kin={@nextof_kin}
+      return_to={Routes.page_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone number</th>
+      <th>Relation</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="next_of_kins">
+    <%= for nextof_kin <- @next_of_kins do %>
+      <tr id={"nextof_kin-#{nextof_kin.id}"}>
+        <td><%= nextof_kin.name %></td>
+        <td><%= nextof_kin.phone_number %></td>
+        <td><%= nextof_kin.relation %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.nextof_kin_show_path(@socket, :show, nextof_kin) %></span>
+          <span><%= live_patch "Edit", to: Routes.nextof_kin_index_path(@socket, :edit, nextof_kin) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: nextof_kin.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Nextof kin", to: Routes.nextof_kin_index_path(@socket, :new) %></span>

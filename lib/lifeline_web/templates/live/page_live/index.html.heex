@@ -1,0 +1,87 @@
+<div class="w-[250px] flex fixed flex-col gap-4 justify-center items-center bg-[#00ADEE]  fixed h-[100vh]">
+  <img
+    src={Routes.static_path(@socket, "/images/bluelogo.png")}
+    alt="doctor"
+    class="w-[180px]  m-4 object-cover"
+  />
+
+</div>
+
+
+
+<div class="ml-[250px] p-4 grid grid-cols-2 gap-12">
+
+<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+<span><%= live_patch "New Nextof kin", to: Routes.page_index_path(@socket, :addnextofkin) %></span>
+gtvhbjnkm
+
+
+
+</div>
+
+<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+<span><%= live_patch "New Food allergy", to: Routes.page_index_path(@socket, :addfoodallergy) %></span>
+
+
+
+</div>
+
+<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+
+
+<span><%= live_patch "New Drug allergy", to: Routes.page_index_path(@socket, :adddrugallergy) %></span>
+</div>
+
+<div class="w-[100%] rounded-md shadow-md shadow-gray-300  h-[400px] overflow-y-scroll">
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+<%= if @live_action in [:addnextofkin] do %>
+  <.modal return_to={Routes.page_index_path(@socket, :index)}>
+    <.live_component
+      module={LifelineWeb.NextofKinLive.FormComponent}
+      id={@nextof_kin.id || :new}
+      title={@page_title}
+      action={@live_action}
+      nextof_kin={@nextof_kin}
+      return_to={Routes.page_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+
+<%= if @live_action in [:addfoodallergy] do %>
+  <.modal return_to={Routes.page_index_path(@socket, :index)}>
+    <.live_component
+      module={LifelineWeb.FoodAllergyLive.FormComponent}
+      id={@food_allergy.id || :new}
+      title={@page_title}
+      action={@live_action}
+      food_allergy={@food_allergy}
+      return_to={Routes.page_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+
+
+<%= if @live_action in [:adddrugallergy] do %>
+  <.modal return_to={Routes.page_index_path(@socket, :index)}>
+    <.live_component
+      module={LifelineWeb.DrugAllergyLive.FormComponent}
+      id={@drug_allergy.id || :new}
+      title={@page_title}
+      action={@live_action}
+      drug_allergy={@drug_allergy}
+      return_to={Routes.page_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>

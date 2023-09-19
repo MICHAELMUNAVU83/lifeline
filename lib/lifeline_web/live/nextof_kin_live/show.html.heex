@@ -1,0 +1,36 @@
+<h1>Show Nextof kin</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.nextof_kin_show_path(@socket, :show, @nextof_kin)}>
+    <.live_component
+      module={LifelineWeb.NextofKinLive.FormComponent}
+      id={@nextof_kin.id}
+      title={@page_title}
+      action={@live_action}
+      nextof_kin={@nextof_kin}
+      return_to={Routes.nextof_kin_show_path(@socket, :show, @nextof_kin)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @nextof_kin.name %>
+  </li>
+
+  <li>
+    <strong>Phone number:</strong>
+    <%= @nextof_kin.phone_number %>
+  </li>
+
+  <li>
+    <strong>Relation:</strong>
+    <%= @nextof_kin.relation %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.nextof_kin_show_path(@socket, :edit, @nextof_kin), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.nextof_kin_index_path(@socket, :index) %></span>
