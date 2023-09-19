@@ -2,6 +2,8 @@ import Config
 
 # Configure your database
 config :lifeline, Lifeline.Repo,
+  username: "root",
+  password: "Khohisan@7",
   hostname: "localhost",
   database: "lifeline_dev",
   stacktrace: true,
