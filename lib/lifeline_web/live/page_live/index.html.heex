@@ -39,8 +39,8 @@
     </span>
     <div class="flex gap-2 flex-wrap p-2">
       <%= for foodallergy <- @food_allergies do %>
-        <div class="border-l-4 border-[#53794B] flex flex-col p-2 rounded-lg  bg-[#E9E8F8] h-[10%] m-2">
-          <span><%= foodallergy.name %></span>
+        <div class="border-l-4 border-[#53794B] flex gap-2 justify-between py-2 px-2 rounded-lg  bg-[#E9E8F8] h-[10%] m-2">
+          <span><%= foodallergy.name %></span><button class = " text-sm" phx-click ="delete_food" phx-value-id ={foodallergy.id}>X</button>
         </div>
       <% end %>
     </div>

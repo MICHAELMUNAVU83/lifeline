@@ -69,7 +69,12 @@ defmodule LifelineWeb.PageLive.Index do
 
     {:noreply, assign(socket, :drug_allergies, DrugAllergies.list_drug_allergies())}
   end
+  def handle_event("delete_food", %{"id" => id}, socket) do
+    food_allergy = FoodAllergies.get_food_allergy!(id)
+    {:ok, _} = FoodAllergies.delete_food_allergy(food_allergy)
 
+    {:noreply, assign(socket, :food_allergies, FoodAllergies.list_food_allergies())}
+  end
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Next of kins")
