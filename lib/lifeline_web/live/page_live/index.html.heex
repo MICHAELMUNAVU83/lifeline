@@ -1,6 +1,5 @@
-  
-<span style ="display:none;"phx-hook ="qrcode" id="qrtext" ><%=@qrcode_url%></span>
-<div class = ""id = "qr"></div>
+<span style="display:none;" phx-hook="qrcode" id="qrtext"><%= @qrcode_url %></span>
+<div class="" id="qr"></div>
 <div class="w-[250px]  flex  flex-col gap-4 justify-center items-center bg-[#00ADEE]  fixed h-[100vh]">
   <img
     src={Routes.static_path(@socket, "/images/bluelogo.png")}
@@ -43,7 +42,11 @@
     <div class="flex gap-2 flex-wrap p-2">
       <%= for foodallergy <- @food_allergies do %>
         <div class="border-l-4 border-[#53794B] flex gap-2 justify-between py-2 px-2 rounded-lg  bg-[#E9E8F8] h-[10%] m-2">
-          <span><%= foodallergy.name %></span><button class = " text-sm" phx-click ="delete_food" phx-value-id ={foodallergy.id}>X</button>
+          <span><%= foodallergy.name %></span><button
+            class=" text-sm"
+            phx-click="delete_food"
+            phx-value-id={foodallergy.id}
+          >X</button>
         </div>
       <% end %>
     </div>

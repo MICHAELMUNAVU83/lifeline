@@ -19,7 +19,6 @@ defmodule LifelineWeb.Router do
 
   scope "/", LifelineWeb do
     pipe_through [:browser]
-
   end
 
   # Other scopes may use custom stacks.

@@ -14,7 +14,7 @@ defmodule LifelineWeb.PageLive.Index do
     food_allergies = FoodAllergies.list_user_food_allergies(user.id)
     next_of_kin = NextOfKins.list_user_nextofkin(user.id)
     id = Integer.to_string(user.id)
-    qrcode_url = "localhost:4000/users/"<> id
+    qrcode_url = "localhost:4000/users/" <> id
     IO.inspect(qrcode_url)
 
     {:ok,
@@ -23,7 +23,7 @@ defmodule LifelineWeb.PageLive.Index do
      |> assign(:drug_allergies, drug_allergies)
      |> assign(:food_allergies, food_allergies)
      |> assign(:nextofkins, next_of_kin)
-    |>assign(:qrcode_url,qrcode_url)}
+     |> assign(:qrcode_url, qrcode_url)}
   end
 
   def handle_params(params, _url, socket) do
@@ -73,12 +73,14 @@ defmodule LifelineWeb.PageLive.Index do
 
     {:noreply, assign(socket, :drug_allergies, DrugAllergies.list_drug_allergies())}
   end
+
   def handle_event("delete_food", %{"id" => id}, socket) do
     food_allergy = FoodAllergies.get_food_allergy!(id)
     {:ok, _} = FoodAllergies.delete_food_allergy(food_allergy)
 
     {:noreply, assign(socket, :food_allergies, FoodAllergies.list_food_allergies())}
   end
+
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Next of kins")
