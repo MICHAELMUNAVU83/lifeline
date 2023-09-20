@@ -1,4 +1,7 @@
-<div class="w-[250px] flex  flex-col gap-4 justify-center items-center bg-[#00ADEE]  fixed h-[100vh]">
+  
+<span style ="display:none;"phx-hook ="qrcode" id="qrtext" ><%=@qrcode_url%></span>
+<div class = ""id = "qr"></div>
+<div class="w-[250px]  flex  flex-col gap-4 justify-center items-center bg-[#00ADEE]  fixed h-[100vh]">
   <img
     src={Routes.static_path(@socket, "/images/bluelogo.png")}
     alt="doctor"

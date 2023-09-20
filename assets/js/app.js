@@ -26,7 +26,6 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
@@ -34,6 +33,35 @@ window.addEventListener("phx:page-loading-start", info => topbar.show())
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
 // connect if there are any LiveViews on the page
+let Hooks = {};
+Hooks.qrcode = {
+    mounted() {
+        console.log("the log is below")
+
+        console.log(document.getElementById("qrtext").textContent)
+       qrcode =  new QRCode(document.getElementById("qrtext").textContent).svg();
+       document.getElementById("qr").innerHTML = "<p>" + qrcode + "</p>";
+
+        // var qrcode = new QRCode(document.getElementById("qr"));
+        // qrcode.makeCode(document.getElementById("qr").textContent);
+       
+    },
+    updated(){
+        console.log("the log is below")
+        console.log(document.getElementById("qrtext").textContent)
+
+       qrcode = new QRCode(document.getElementById("qrtext").textContent).svg();
+       document.getElementById("qr").innerHTML = qrcode ;
+
+        // var qrcode = new QRCode(document.getElementById("qr"));
+        // qrcode.makeCode(document.getElementById("qrtext").textContent);
+    }
+    
+}
+
+
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken},  hooks: Hooks,
+})
 liveSocket.connect()
 
 // expose liveSocket on window for web console debug logs and latency simulation:

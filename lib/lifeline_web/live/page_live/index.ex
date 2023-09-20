@@ -13,13 +13,17 @@ defmodule LifelineWeb.PageLive.Index do
     drug_allergies = DrugAllergies.list_user_drug_allergies(user.id)
     food_allergies = FoodAllergies.list_user_food_allergies(user.id)
     next_of_kin = NextOfKins.list_user_nextofkin(user.id)
+    id = Integer.to_string(user.id)
+    qrcode_url = "localhost:4000/users/"<> id
+    IO.inspect(qrcode_url)
 
     {:ok,
      socket
      |> assign(:current_user, user)
      |> assign(:drug_allergies, drug_allergies)
      |> assign(:food_allergies, food_allergies)
-     |> assign(:nextofkins, next_of_kin)}
+     |> assign(:nextofkins, next_of_kin)
+    |>assign(:qrcode_url,qrcode_url)}
   end
 
   def handle_params(params, _url, socket) do

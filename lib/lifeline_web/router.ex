@@ -18,14 +18,8 @@ defmodule LifelineWeb.Router do
   end
 
   scope "/", LifelineWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser]
 
-    live "/", PageLive.Index, :index
-    live "/addnextofkin", PageLive.Index, :addnextofkin
-    live "/addfoodallergy", PageLive.Index, :addfoodallergy
-    live "/adddrugallergy", PageLive.Index, :adddrugallergy
-    live "/kin/:id/edit", PageLive.Index, :edit_kin
-    live "/drug/:id/edit", PageLive.Index, :edit_drug
   end
 
   # Other scopes may use custom stacks.
@@ -79,6 +73,14 @@ defmodule LifelineWeb.Router do
 
   scope "/", LifelineWeb do
     pipe_through [:browser, :require_authenticated_user]
+
+    live "/", PageLive.Index, :index
+    live "/addnextofkin", PageLive.Index, :addnextofkin
+    live "/addfoodallergy", PageLive.Index, :addfoodallergy
+    live "/adddrugallergy", PageLive.Index, :adddrugallergy
+    live "/kin/:id/edit", PageLive.Index, :edit_kin
+    live "/drug/:id/edit", PageLive.Index, :edit_drug
+    live "/users/:id", PageLive.Show, :show
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
