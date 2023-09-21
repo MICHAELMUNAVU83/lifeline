@@ -14,7 +14,8 @@ defmodule LifelineWeb.PageLive.Index do
     food_allergies = FoodAllergies.list_user_food_allergies(user.id)
     next_of_kin = NextOfKins.list_user_nextofkin(user.id)
     id = Integer.to_string(user.id)
-    qrcode_url = "localhost:4000/users/" <> id
+    qrcode_url = "localhost:4000/users/#{id}"
+
     IO.inspect(qrcode_url)
 
     {:ok,

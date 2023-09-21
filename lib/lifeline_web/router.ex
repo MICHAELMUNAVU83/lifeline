@@ -79,7 +79,6 @@ defmodule LifelineWeb.Router do
     live "/adddrugallergy", PageLive.Index, :adddrugallergy
     live "/kin/:id/edit", PageLive.Index, :edit_kin
     live "/drug/:id/edit", PageLive.Index, :edit_drug
-    live "/users/:id", PageLive.Show, :show
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
@@ -88,6 +87,7 @@ defmodule LifelineWeb.Router do
 
   scope "/", LifelineWeb do
     pipe_through [:browser]
+    live "/users/:id", PageLive.Show, :show
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
